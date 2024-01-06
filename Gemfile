@@ -5,6 +5,8 @@ ruby "3.2.1"
 
 gem "sinatra"
 gem "sinatra-contrib"
+gem "nokogiri"
+gem "open-uri"
 
 # Use Puma as the app server
 gem "puma", "~> 5.0"

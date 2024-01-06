@@ -1,0 +1,44 @@
+<p><a href="/">Go Back</a></p>
+<div style="display: flex; justify-content: space-around;">
+  <div>
+    <h2 class="fighter_title"><a href="/<%= @fighter1.gsub(" ","%20" ) %>"> <%= @fighter1 %></a> (<%= @fighter1_odds %>) </h2>
+    <img class="fighter_title" src=""></img>
+    <h4 class="fighter_title"> <%= @record1 %> </h4>
+    <hr>
+    <dl>
+      <dt>DOB</dt>
+        <dd><%= @fighter1_dob %> (<strong><%= @fighter1_age %> years old</strong>)</dd>
+      <dt>Height</dt>
+        <dd><%= @fighter1_height %></dd>
+      <dt>Weight</dt>
+        <dd><%= @fighter1_weight %></dd>
+      <dt>Reach</dt>
+        <dd><%= @fighter1_reach %></dd>
+      <dt>Stance</dt>
+        <dd><%= @fighter1_stance %></dd>
+      
+    </dl>
+    <%= @fight_history1 %>
+  </div>
+  <h3 style="margin: 10% 0;">VS.</h3>
+  <div>
+    <h2 class="fighter_title"><a href="/<%= @fighter2.gsub(" ","%20" ) %>"><%= @fighter2 %></a> (<%= @fighter2_odds %>) </h2>
+    <img class="fighter_title" src=""></img>
+    <h4 class="fighter_title"> <%= @record2 %> </h4>
+    <hr>
+    <dl>
+      <dt>DOB</dt>
+        <dd><%= @fighter2_dob %> (<strong><%= @fighter2_age %> years old)</strong></dd>
+      <dt>Height</dt>
+        <dd><%= @fighter2_height %></dd>
+      <dt>Weight</dt>
+        <dd><%= @fighter2_weight %></dd>
+      <dt>Reach</dt>
+        <dd><%= @fighter2_reach %></dd>
+      <dt>Stance</dt>
+        <dd><%= @fighter2_stance %></dd>
+      
+    </dl>
+    <%= @fight_history2 %>
+  </div>
+</div>

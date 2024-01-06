@@ -1,0 +1,49 @@
+<h1>Upcoming MMA Fights & Odds</h1>
+<ul>
+<% 
+@sports_parse.each do |fight|
+  fight_id = fight.fetch("id")
+  home_team = fight.fetch("home_team")  
+  away_team = fight.fetch("away_team")
+  if fight.fetch("bookmakers").length > 0
+    home_team_odds = fight.dig("bookmakers", 0, "markets", 0)
+    home_team_odds = home_team_odds.fetch("outcomes")
+    home_team_odds.each do |fighter|
+      if fighter.fetch("name") == home_team
+        home_team_odds = fighter.fetch("price").to_i
+      end
+    end
+
+    away_team_odds = fight.dig("bookmakers", 0, "markets", 0)
+    away_team_odds = away_team_odds.fetch("outcomes")
+    away_team_odds.each do |fighter|
+      if fighter.fetch("name") == away_team
+        away_team_odds = fighter.fetch("price").to_i
+      end
+    end
+
+
+    if home_team_odds > 0
+      home_team_odds = "+" + home_team_odds.to_s
+    end
+    if away_team_odds > 0
+      away_team_odds = "+" + away_team_odds.to_s
+    end
+  end
+
+  %>
+<li>
+
+<a href="/<%= home_team.gsub(" ","%20" ) + "/" + away_team.gsub(" ","%20" ) + "/" + fight_id %>">
+     <%= home_team %>  (<%= home_team_odds %>) <strong>VS.</strong> <%= away_team %> (<%=  away_team_odds %>)
+  </a>
+
+
+</li>
+
+
+
+
+
+<% end %>
+</ul>
