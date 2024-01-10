@@ -1,8 +1,9 @@
 <p><a href="/">Go Back Home</a></p>
-<h1> <%= @fighter %> </h1>
-<h4> <%= @record %> </h4>
-<p> <%= @pic_link %> </p>
-
+<h1 class="fighter_title"> <%= @fighter %> </h1>
+<h4 class="fighter_title"> <%= @record %> </h4>
+<p><%= @fighter_stats  %></p>
+<hr>
+<div style="display: flex; justify-content: space-around; align-items: center;">
 <dl>
 <dt>DOB</dt>
   <dd><%= @fighter_dob %> (<strong><%= @fighter_age %> years old</strong>)</dd>
@@ -14,9 +15,27 @@
   <dd><%= @fighter_reach %></dd>
 <dt>Stance</dt>
   <dd><%= @fighter_stance %></dd>
-
-
-
-
 </dl>
+
+<dl style="font-size: 14px; background-color: powderblue;">
+<dt>Significant Strikes Landed per Minute</dt>
+  <dd><strong><%= @stat_values_hash["SLpM:"] %></strong></dd>
+<dt>Significant Striking Accuracy</dt>
+  <dd><strong><%= @stat_values_hash["Str. Acc.:"] %></strong></dd>
+<dt>Significant Strikes Absorbed per Minute</dt>
+  <dd><strong><%= @stat_values_hash["SApM:"] %></strong></dd>
+<dt>Significant Strike Defence (the % of opponents strikes that did not land)</dt>
+  <dd><strong><%= @stat_values_hash["Str. Def:"] %></strong></dd>
+<dt>Average Takedowns Landed per 15 minutes</dt>
+  <dd><strong><%= @stat_values_hash["TD Avg.:"] %></strong></dd>
+<dt>Takedown Accuracy</dt>
+  <dd><strong><%= @stat_values_hash["TD Acc.:"] %></strong></dd>
+<dt>Takedown Defense (the % of opponents TD attempts that did not land)</dt>
+  <dd><strong><%= @stat_values_hash["TD Def.::"] %></strong></dd>
+<dt>Average Submissions Attempted per 15 minutes</dt>
+  <dd><strong><%= @stat_values_hash["Sub. Avg.:"] %></strong></dd>
+</dl>
+</div>
+<div style="display: flex; justify-content: space-around;">
 <%= @fight_history %>
+</div>

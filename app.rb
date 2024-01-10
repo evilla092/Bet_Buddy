@@ -100,6 +100,27 @@ get("/:fighter1/:fighter2/:fight_id") do
   @fighter1_age = now.year - @fighter1_age.year
   @fight_history1 = @doc12.css("body > section > div > div > table")
 
+  fighter_stats1 = @doc12.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values1 = fighter_stats1.css("li").text.split("          ")
+
+  clean_stat_values1 = []
+  
+  stat_values1.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values1.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash1 = Hash[*clean_stat_values1.flatten(1)]
+
   #Pulls the fighter2 data from  UFCstats.com
 
      
@@ -139,6 +160,33 @@ get("/:fighter1/:fighter2/:fight_id") do
   @fighter2_age = now.year - @fighter2_age.year
   @fight_history2 = @doc22.css("body > section > div > div > table")
 
+  fighter_stats2 = @doc22.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values2 = fighter_stats2.css("li").text.split("          ")
+
+  clean_stat_values2 = []
+  
+  stat_values2.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values2.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash2 = Hash[*clean_stat_values2.flatten(1)]
+
+
+
+
+
+
+  
   erb(:fight_summary)
 
 
@@ -185,6 +233,29 @@ get("/:fighter") do
   @fighter_age = now.year - @fighter_age.year
 
   @fight_history = @doc2.css("body > section > div > div > table")
+
+  fighter_stats = @doc2.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values = fighter_stats.css("li").text.split("          ")
+
+  clean_stat_values = []
+  
+  stat_values.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash = Hash[*clean_stat_values.flatten(1)]
+  
+
   
 
 
