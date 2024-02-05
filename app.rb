@@ -94,11 +94,32 @@ get("/:fighter1/:fighter2/:fight_id") do
   @fighter1_weight = @fighter1_data.at(4) + " " + @fighter1_data.at(5)
   @fighter1_reach = @fighter1_data.at(7)
   @fighter1_stance = @fighter1_data.at(9)
-  @fighter1_dob = @fighter1_data.at(11) + " " + @fighter1_data.at(12) + " " + @fighter1_data.at(13)
-  @fighter1_age = DateTime.parse(@fighter1_dob)
+  @fighter1_dob_s = @fighter1_data.at(11) + " " + @fighter1_data.at(12) + " " + @fighter1_data.at(13)
+  @fighter1_dob = DateTime.parse(@fighter1_dob_s)
   now = Date.today
-  @fighter1_age = now.year - @fighter1_age.year
+  @fighter1_age = ((now - @fighter1_dob)/365).to_i
   @fight_history1 = @doc12.css("body > section > div > div > table")
+
+  fighter_stats1 = @doc12.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values1 = fighter_stats1.css("li").text.split("          ")
+
+  clean_stat_values1 = []
+  
+  stat_values1.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values1.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash1 = Hash[*clean_stat_values1.flatten(1)]
 
   #Pulls the fighter2 data from  UFCstats.com
 
@@ -133,12 +154,39 @@ get("/:fighter1/:fighter2/:fight_id") do
   @fighter2_weight = @fighter2_data.at(4) + " " + @fighter2_data.at(5)
   @fighter2_reach = @fighter2_data.at(7)
   @fighter2_stance = @fighter2_data.at(9)
-  @fighter2_dob = @fighter2_data.at(11) + " " + @fighter2_data.at(12) + " " + @fighter2_data.at(13)
-  @fighter2_age = DateTime.parse(@fighter2_dob)
+  @fighter2_dob_s = @fighter2_data.at(11) + " " + @fighter2_data.at(12) + " " + @fighter2_data.at(13)
+  @fighter2_dob = DateTime.parse(@fighter2_dob_s)
   now = Date.today
-  @fighter2_age = now.year - @fighter2_age.year
+  @fighter2_age = ((now - @fighter2_dob)/365).to_i
   @fight_history2 = @doc22.css("body > section > div > div > table")
 
+  fighter_stats2 = @doc22.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values2 = fighter_stats2.css("li").text.split("          ")
+
+  clean_stat_values2 = []
+  
+  stat_values2.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values2.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash2 = Hash[*clean_stat_values2.flatten(1)]
+
+
+
+
+
+
+  
   erb(:fight_summary)
 
 
@@ -179,12 +227,35 @@ get("/:fighter") do
   @fighter_weight = @fighter_data.at(4) + " " + @fighter_data.at(5)
   @fighter_reach = @fighter_data.at(7)
   @fighter_stance = @fighter_data.at(9)
-  @fighter_dob = @fighter_data.at(11) + " " + @fighter_data.at(12) + " " + @fighter_data.at(13)
-  @fighter_age = DateTime.parse(@fighter_dob)
+  @fighter_dob_s = @fighter_data.at(11) + " " + @fighter_data.at(12) + " " + @fighter_data.at(13)
+  @fighter_dob = Date.parse(@fighter_dob_s)
   now = Date.today
-  @fighter_age = now.year - @fighter_age.year
+  @fighter_age = ((now - @fighter_dob)/365).to_i
 
   @fight_history = @doc2.css("body > section > div > div > table")
+
+  fighter_stats = @doc2.css("body > section > div > div > div.b-list__info-box.b-list__info-box_style_middle-width.js-guide.clearfix > div.b-list__info-box-left.clearfix")
+
+  stat_values = fighter_stats.css("li").text.split("          ")
+
+  clean_stat_values = []
+  
+  stat_values.each do |value|
+    if value == "\n" || value == "\n\n" || value == ""
+      next
+    else
+      value = value.delete("/n").strip
+      if value == ""
+        next
+      else
+      clean_stat_values.push(value)
+      end
+    end
+  end
+  
+  @stat_values_hash = Hash[*clean_stat_values.flatten(1)]
+  
+
   
 
 
