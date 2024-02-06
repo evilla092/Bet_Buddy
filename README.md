@@ -1,18 +1,1 @@
-# sinatra-template
-
-Use this repository to create new Sinatra apps. 
-
-Optionally, to use `ActiveRecord` for database operations, add to the `app.rb`:
-
-```ruby
-require "sinatra/activerecord"
-```
-
-And in the `config/environment.rb` file add this code block:
-
-```ruby
-configure do
-  # setup a database connection
-  set(:database, { adapter: "sqlite3", database: "db/development.sqlite3" })
-end
-```
+Description: This is a web app called BetBuddy that acceses the SportRadar api to get the gambling odds of upcoming UFC fights. The web app homepage constantly updates as new fights get added into the API. You can also click into the fight and see a break down of each of the fighter's stats which are scraped from UFCstats.com using Nokogiri web scraper.
